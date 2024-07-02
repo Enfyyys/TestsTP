@@ -7,7 +7,7 @@ ${BASE_URL}       https://opensource-demo.orangehrmlive.com
 ${BROWSER}        Firefox
 ${USER_ROLE}      ESS
 ${STATUS}         Enabled
-${EMPLOYEE_NAME}  John Doe
+${EMPLOYEE_NAME}  a
 ${USERNAME}       Robotframework
 ${PASSWORD}       secure password
 
@@ -18,7 +18,7 @@ User Management (Selenium) Robot Test
     Navigate To Admin Page
     Add New User    ${USER_ROLE}    ${STATUS}    ${EMPLOYEE_NAME}    ${USERNAME}    ${PASSWORD}
     Search User    ${USERNAME}
-    Modify User    ${USERNAME}    ESS    Disabled
+    Modify User
     Delete User    ${USERNAME}
     Logout
     Verify Logged Out
@@ -30,46 +30,49 @@ Open Browser To Login Page
 
 Login With Credentials
     [Arguments]    ${username}    ${password}
+    Wait Until Element Is Visible    name=username    timeout=15s
     Input Text    name=username    ${username}
     Input Password    name=password    ${password}
     Click Button    xpath=//button[@type='submit']
 
 Navigate To Admin Page
-    # Localiser l'élément "Admin" avec un XPath plus générique
-    Wait Until Element Is Visible    xpath=//span[text()='Admin']    timeout=10s
-    Click Element    xpath=//span[text()='Admin']/ancestor::a
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[1]/aside/nav/div[2]/ul/li[1]/a    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[1]/aside/nav/div[2]/ul/li[1]/a
 
 Add New User
     [Arguments]    ${role}    ${status}    ${employee_name}    ${username}    ${password}
-    Click Button    xpath=//button[contains(text(),'Add')]
-    Select From List By Label    xpath=//label[text()='User Role']/following::div[1]//select    ${role}
-    Select From List By Label    xpath=//label[text()='Status']/following::div[1]//select    ${status}
-    Input Text    xpath=//label[text()='Employee Name']/following::input    ${employee_name}
-    Input Text    xpath=//label[text()='Username']/following::input    ${username}
-    Input Text    xpath=//label[text()='Password']/following::input    ${password}
-    Input Text    xpath=//label[text()='Confirm Password']/following::input    ${password}
-    Click Button    xpath=//button[contains(text(),'Save')]
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[1]/button    timeout=15s
+    Click Button    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[1]/button
+    
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div[2]/div[2]    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div[2]/div[2]
+    
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div/input    timeout=15s
+    Input Text    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div/input    ${employeeName}
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div[2]/div[2]    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div[2]/div[2]
 
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div[1]    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div[1]
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div[2]/div[2]    timeout=15s
+    Click Element    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div[2]/div[2]
+
+    Input Text    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[4]/div/div[2]/input    ${username}
+
+    Click Button    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/button[2]
+    
 Search User
     [Arguments]    ${username}
-    Input Text    xpath=//label[text()='Username']/following::input[1]    ${username}
-    Click Button    xpath=//button[contains(text(),'Search')]
+    Wait until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input    timeout=15s
+    Input Text    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input    ${username}
 
+    Wait until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]    timeout=15s
+    Click Button    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]
+    
 Modify User
-    [Arguments]    ${username}    ${new_role}    ${new_status}
-    Click Element    xpath=//a[contains(text(),${username})]
-    Select From List By Label    xpath=//label[text()='User Role']/following::div[1]//select    ${new_role}
-    Select From List By Label    xpath=//label[text()='Status']/following::div[1]//select    ${new_status}
-    Click Button    xpath=//button[contains(text(),'Save')]
-
-Delete User
-    [Arguments]    ${username}
-    Click Element    xpath=//a[contains(text(),${username})]/parent::td/preceding-sibling::td//input[@type='checkbox']
-    Click Button    xpath=//button[contains(text(),'Delete')]
-    Click Button    xpath=//button[contains(text(),'Ok')]
-
-Logout
-    Click Element    xpath=//a[@href='/web/index.php/auth/logout']
-
-Verify Logged Out
-    Wait Until Element Is Visible    xpath=//input[@name='username']
+    Wait Until Element Is Visible    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[6]/div/button[2]    timeout=15s
+    Click Button    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[6]/div/button[2]
+    Input Text    xpath=/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[4]/div/div[2]/input    ${username}
+    
