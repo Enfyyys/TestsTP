@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-07-02T10:16:20.862535" rpa="false" schemaversion="5">
+<suite id="s1" name="My First" source="C:\Users\anton\Documents\cours tests\TestsTP\Tests\my_first.robot">
+<test id="s1-t1" name="My First Robot Test" line="2">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Hello Robot World!</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-07-02T10:16:20.900306" elapsed="0.000561"/>
+</kw>
+<tag>my_first</tag>
+<status status="PASS" start="2024-07-02T10:16:20.899618" elapsed="0.001249"/>
+</test>
+<status status="PASS" start="2024-07-02T10:16:20.863535" elapsed="0.038369"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">my_first</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="My First">My First</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
